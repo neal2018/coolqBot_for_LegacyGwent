@@ -15,7 +15,7 @@ configuration:
   # - RelWithDebInfo # 优化速度 - 包括调试信息
 
 install:
-  - git submodule update --init --recursive # 下载子模块
+  - git submodule add https://github.com/cqmoe/cqcppsdk.git extern/cqcppsdk # 下载子模块
   - set /p APP_ID=<app_id.txt # 如果你没有使用 app_id.txt 存放 app id，需在此手动设置
 
 build_script:
