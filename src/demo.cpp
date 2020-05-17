@@ -105,7 +105,7 @@ bool checkIfSearchCard(const string &msg) {
 
 CQ_INIT {
     on_enable([] {
-        ifstream f("/mnt/c/Users/neal/Projects/coolqBot/src/cardInfo.json");
+        ifstream f("/home/ubuntu/data/coolq_data/data/cardInfo.json");
         cardInfo = json::parse(f);
         // std::cout << cardInfo;
         logging::info("启用", "插件已启用");
