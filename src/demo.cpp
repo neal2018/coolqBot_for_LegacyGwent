@@ -127,7 +127,7 @@ CQ_INIT {
     });
 
     on_group_message([](const GroupMessageEvent &event) {
-        static const set<int64_t> ENABLED_GROUPS = {123456, 123457};
+        static const set<int64_t> ENABLED_GROUPS = {945408322};
         if (ENABLED_GROUPS.count(event.group_id) == 0) return; // 不在启用的群中, 忽略
         if (checkIfSearchCard(event.message)) {
             try {
