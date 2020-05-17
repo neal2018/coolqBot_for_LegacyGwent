@@ -57,7 +57,7 @@ string searchCard(const string &msg) {
     for (auto it = cardInfo.begin(); it != cardInfo.end(); ++it) {
         json nestedInfo = *it;
         string name = nestedInfo["Name"].get<string>();
-        string info = nestedInfo["Name"].get<string>();
+        string info = nestedInfo["Info"].get<string>();
 
         std::size_t foundName = name.find(searchContent);
         std::size_t foundInfo = info.find(searchContent);
