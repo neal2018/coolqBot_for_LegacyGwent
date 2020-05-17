@@ -13,8 +13,7 @@ using Message = cq::message::Message;
 using MessageSegment = cq::message::MessageSegment;
 
 const string CardMapVersion = "1.0.0.9";
-string cardInfoString = "{\"12004\": {\"CardId\": \"12004\", \"Name\": \"利维亚的杰洛特\", \"Strength\": 15, \"Info\": \"没有特殊技能。\", \"Group\": \"Gold\", \"Faction\": \"Neutral\", \"CardType\": \"Unit\", \"Categories\": [\"Witcher\"], \"Flavor\": \"如果要付出这种代价方能拯救世界，那就让世界毁灭算了。\", \"HideTags\": [\"Geralt\"], \"CardUseInfo\": \"MyRow\", \"IsDerive\": false, \"IsDoomed\": false, \"IsCountdown\": false, \"Countdown\": 0, \"IsConcealCard\": false, \"CrewCount\": 0, \"CardArtsId\": \"11210300\"}, \"12005\": {\"CardId\": \"12005\", \"Name\": \"希里：冲刺\", \"Strength\": 11, \"Info\": \"被置入墓场时返回牌组，并获得3点强化。\", \"Group\": \"Gold\", \"Faction\": \"Neutral\", \"CardType\": \"Unit\", \"Categories\": [\"Cintra\", \"Witcher\"], \"Flavor\": \"你知道童话几时成真吗？大家都开始相信的时候。\", \"HideTags\": [], \"CardUseInfo\": \"MyRow\", \"IsDerive\": false, \"IsDoomed\": false, \"IsCountdown\": false, \"Countdown\": 0, \"IsConcealCard\": false, \"CrewCount\": 0, \"CardArtsId\": \"11211000\"}, \"12006\": {\"CardId\": \"12006\", \"Name\": \"萨琪亚萨司：龙焰\", \"Strength\": 11, \"Info\": \"丢弃所有手牌，抽同等数量的牌。\", \"Group\": \"Gold\", \"Faction\": \"Neutral\", \"CardType\": \"Unit\", \"Categories\": [\"Aedirn\", \"Draconid\"], \"Flavor\": \"我继承了父亲的变身能力……好吧，尽管我只有一种变化形态。\", \"HideTags\": [], \"CardUseInfo\": \"MyRow\", \"IsDerive\": false, \"IsDoomed\": false, \"IsCountdown\": false, \"Countdown\": 0, \"IsConcealCard\": false, \"CrewCount\": 0, \"CardArtsId\": \"20005700\"}, \"12007\": {\"CardId\": \"12007\", \"Name\": \"特莉丝·梅莉葛德\", \"Strength\": 10, \"Info\": \"造成5点伤害。\", \"Group\": \"Gold\", \"Faction\": \"Neutral\", \"CardType\": \"Unit\", \"Categories\": [\"Mage\", \"Temeria\"], \"Flavor\": \"我能照顾自己，相信我。\", \"HideTags\": [\"Triss\"], \"CardUseInfo\": \"MyRow\", \"IsDerive\": false, \"IsDoomed\": false, \"IsCountdown\": false, \"Countdown\": 0, \"IsConcealCard\": false, \"CrewCount\": 0, \"CardArtsId\": \"11210600\"}}";
-json cardInfo = json::parse(cardInfoString);
+json cardInfo;
 
 string searchCard(const string &msg) {
     string searchContent = "";
@@ -106,8 +105,8 @@ bool checkIfSearchCard(const string &msg) {
 
 CQ_INIT {
     on_enable([] {
-        // ifstream f("/home/ubuntu/data/coolq_data/data/cardInfo.json");
-        // cardInfo = json::parse(f);
+        ifstream f("/home/ubuntu/coolq/data/cardInfo.json");
+        cardInfo = json::parse(f);
         // std::cout << cardInfo;
         logging::info("启用", "插件已启用");
     });
