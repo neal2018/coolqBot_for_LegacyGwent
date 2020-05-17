@@ -1,12 +1,11 @@
 {
-    "$schema": "https://awesome.cqp.moe/schema/app/v9/app-schema.json",
     "ret": 1,
     "apiver": 9,
-    "name": "填写应用名称",
+    "name": "卡查",
     "version": "1.0.0",
     "version_id": 1,
-    "author": "填写你的名字或 Id",
-    "description": "填写你的应用描述",
+    "author": "neal",
+    "description": "应用描述",
     "event": [ // 可以修改 priority 来调整插件的优先级, 其它字段不可修改, 否则将无法使用
         {
             "id": 1003,
@@ -115,14 +114,6 @@
         }
     ],
     "menu": [ // name 字段为显示在酷Q应用菜单中的文字, function 字段对应 CQ_MENU 宏调用的参数
-        {
-            "name": "菜单 1",
-            "function": "menu_demo_1"
-        },
-        {
-            "name": "菜单 2",
-            "function": "menu_demo_2"
-        }
     ],
     "status": [],
     "auth": [ // 需要根据 API 调用情况来注释或取消注释这里的项
@@ -150,6 +141,6 @@
         160, // get_group_member_list
         161, // get_group_list
         162, // get_friend_list
-        180 // delete_message
+        // 180 // delete_message
     ]
 }
