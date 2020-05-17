@@ -117,7 +117,7 @@ CQ_INIT {
                 const string msg = searchCard(event.message);
                 send_message(event.target, msg); // 使用 message 模块构造消息
             } catch (ApiError &err) {
-                logging::warning("私聊", "私聊消息复读失败, 错误码: " + to_string(err.code));
+                logging::warning("私聊", "私聊消息失败, 错误码: " + to_string(err.code));
             }
         }
     });
@@ -127,15 +127,13 @@ CQ_INIT {
     });
 
     on_group_message([](const GroupMessageEvent &event) {
-        static const set<int64_t> ENABLED_GROUPS = {945408322};
-        if (ENABLED_GROUPS.count(event.group_id) == 0) return; // 不在启用的群中, 忽略
         if (checkIfSearchCard(event.message)) {
             try {
                 const string msg = searchCard(event.message);
                 send_group_message(event.group_id, msg); // 发送群消息
-            } catch (ApiError &) { // 忽略发送失败
+            } catch (ApiError &err) {
+                logging::warning("群聊", "群聊消息失败, 错误码: " + to_string(err.code));
             }
         }
-        event.block(); // 阻止当前事件传递到下一个插件
     });
 }
