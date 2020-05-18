@@ -14,7 +14,7 @@
 ```
 git submodule add https://github.com/cqmoe/cqcppsdk.git extern/cqcppsdk
 ```
-然后把`cardInfo.json`存放到电脑中的任一位置，然后把`demo.cpp`中的文件地址
+然后把`cardInfo.json`存放到电脑中的任一位置，再把`demo.cpp`中的文件地址
 ```
 ifstream f("/home/user/coolq/data/cardInfo.json");
 ```
