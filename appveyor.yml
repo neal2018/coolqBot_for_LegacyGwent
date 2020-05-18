@@ -9,7 +9,7 @@ platform:
   - x86
 
 configuration:
-  - Debug # 禁用优化 - 包括调试信息
+  # - Debug # 禁用优化 - 包括调试信息
   - Release # 优化速度 - 排除调试信息
   # - MinSizeRel # 优化最小二进制大小 - 排除调试信息
   # - RelWithDebInfo # 优化速度 - 包括调试信息
