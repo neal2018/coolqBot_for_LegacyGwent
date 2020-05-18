@@ -10,7 +10,11 @@
 - /welcome：发送新人须知
 
 # 部署方式
-安装coolq后，把`cardInfo.json`存放到电脑中的任一位置，然后把`demo.cpp`中的文件地址
+安装coolq后，clone本项目，然后添加子模块
+```
+git submodule add https://github.com/cqmoe/cqcppsdk.git extern/cqcppsdk
+```
+然后把`cardInfo.json`存放到电脑中的任一位置，然后把`demo.cpp`中的文件地址
 ```
 ifstream f("/home/user/coolq/data/cardInfo.json");
 ```
