@@ -250,7 +250,14 @@ CQ_INIT {
             } catch (ApiError &err) {
                 logging::warning("群聊", "群聊消息失败, 错误码: " + to_string(err.code));
             }
-        }else {
+        } else if (event.message.substr(0, 8) == "/welcome") {
+            const string msg =
+                "[WELCOME] 新人好！本群主要讨论的是老昆特相关事宜！\n群文件/"
+                "客户端里面可以下载游戏，带有DIY的是DIY版本！\nzip结尾的是电脑版，apk结尾的是安卓版，dmg结尾的是mac版\n"
+                "在客户端文件夹外也有DIY服的语音抢先体验版，欢迎下载！\nDIY服的更新内容在：https://shimo.im/"
+                "docs/TQdjjwpPwd9hJhKc\n DIY的修改意见在：https://shimo.im/docs/hRIn0C91IFUYZZ6n\n期待你的参与！";
+            send_message(event.target, msg); // 发送群消息
+        } else {
             auto foundhc = event.message.find("hc");
             if (foundhc != string::npos) {
                 try {
@@ -288,6 +295,13 @@ CQ_INIT {
             } catch (ApiError &err) {
                 logging::warning("群聊", "群聊消息失败, 错误码: " + to_string(err.code));
             }
+        } else if (event.message.substr(0, 8) == "/welcome") {
+            const string msg =
+                "[WELCOME] 新人好！本群主要讨论的是老昆特相关事宜！\n群文件/"
+                "客户端里面可以下载游戏，带有DIY的是DIY版本！\nzip结尾的是电脑版，apk结尾的是安卓版，dmg结尾的是mac版\n"
+                "在客户端文件夹外也有DIY服的语音抢先体验版，欢迎下载！\nDIY服的更新内容在：https://shimo.im/"
+                "docs/TQdjjwpPwd9hJhKc\n DIY的修改意见在：https://shimo.im/docs/hRIn0C91IFUYZZ6n\n期待你的参与！";
+            send_group_message(event.group_id, msg); // 发送群消息
         } else {
             auto foundhc = event.message.find("hc");
             if (foundhc != string::npos) {
