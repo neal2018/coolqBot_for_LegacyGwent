@@ -31,7 +31,6 @@ json nicknameInfo = {{"12008", "三寒鸦烧金龙"}, {"12012", "爆牌"},   {"1
                      {"33007", "指哥"},         {"44023", "轻骑兵"}, {"53009", "大萝卜"}, {"52004", "洗脚妹"},
                      {"70019", "三矮子"},       {"70020", "三矮子"}, {"70021", "三矮子"}};
 
-
 string searchCard(const string &msg) {
     string searchContent = "";
 
@@ -96,7 +95,7 @@ string searchCard(const string &msg) {
         string nickname = it.value();
         string cardId = it.key();
         if (possibleAnswerSet.count(cardId) != 0) continue;
-        size_t foundNickname = nickname.find(nicknameInfo[searchContent]);
+        size_t foundNickname = nickname.find(searchContent);
         if (foundNickname != string::npos) {
             possibleAnswer.push_back(cardId);
         }
@@ -142,8 +141,7 @@ bool checkIfSearchCard(const string &msg) {
     }
 }
 
-string gethex(unsigned int c)
-{
+string gethex(unsigned int c) {
     std::ostringstream stm;
     stm << '%' << std::hex << std::nouppercase << c;
     return stm.str();
@@ -256,7 +254,7 @@ bool checkIfSearchInfo(const string &msg) {
 
 CQ_INIT {
     on_enable([] {
-        ifstream f("/home/user/coolq/data/cardInfo.json");
+        ifstream f("/mnt/c/Users/neal/Projects/coolqBot_for_LegacyGwent/src/cardInfo.json");
         cardInfo = json::parse(f);
         // std::cout << cardInfo;
         logging::info("启用", "插件已启用");
