@@ -23,6 +23,33 @@ json eggInfo = {
     {"hc", "hc爬!"},
 };
 
+json nicknameInfo = {
+	{"12008", "三寒鸦烧金龙"},
+	{"12012", "爆牌"},
+	{"12018", "独角兽"},
+	{"12002", "igniIgni"},
+	{"12033", "金天气"},
+	{"12034", "金天气"},
+	{"13007", "爆牌"},
+	{"13010", "小白龙"},
+	{"13012", "绿龙"},
+	{"13014", "三基佬"},
+	{"13013", "三基佬"},
+	{"13017", "三基佬"},
+	{"23007", "三美女"},
+	{"23008", "三美女"},
+	{"23004", "三美女"},
+	{"33006", "爆牌"},
+	{"33007", "指哥"},
+	{"44023", "轻骑兵"},
+	{"53009", "大萝卜"},
+	{"52004", "洗脚妹"},
+	{"70019", "三矮子"},
+	{"70020", "三矮子"},
+	{"70021", "三矮子"},
+}
+
+
 string searchCard(const string &msg) {
     string searchContent = "";
 
@@ -65,18 +92,31 @@ string searchCard(const string &msg) {
     }
 
     vector<string> possibleAnswer;
-
+	set<string> possibleAnswerSet;
     for (auto it = cardInfo.begin(); it != cardInfo.end(); ++it) {
-        json nestedInfo = *it;
+		json nestedInfo = *it;
+
         string name = nestedInfo["Name"].get<string>();
         string info = nestedInfo["Info"].get<string>();
+		string flavor = nestedInfo["Flavor"].get<string>();
 
-        std::size_t foundName = name.find(searchContent);
-        std::size_t foundInfo = info.find(searchContent);
-        if (foundName != string::npos || foundInfo != string::npos) {
+        size_t foundName = name.find(searchContent);
+        size_t foundInfo = info.find(searchContent);
+        size_t foundFlavor = flavor.find(searchContent);
+        if (foundName != string::npos || foundInfo != string::npos || foundFlavor != string::npos) {
             possibleAnswer.push_back(nestedInfo["CardId"]);
-        }
+			possibleAnswerSet.insert(nestedInfo["CardId"]);
+		}
     }
+
+    for (auto it = nickname.items()) {
+		string nickname = it.value();
+		string cardId = it.key();
+		if (possibleAnswerSet.count(cardId) != 0) continue;
+		size_t foundNickname = nickname.find([searchContent]);
+		if (foundNickname != string::ops){
+			possibleAnswer.push_back(cardId);
+	}
 
     if (possibleAnswer.size() == 0) {
         return "[WARN] 没有找到符合条件的个体。要不要试试/baidu呢？";
