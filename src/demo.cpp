@@ -4,6 +4,7 @@
 #include <iostream>
 #include <set>
 #include <sstream>
+#include <unordered_set>
 
 #include <cqcppsdk/cqcppsdk.h>
 #include <nlohmann/json.hpp>
@@ -23,31 +24,12 @@ json eggInfo = {
     {"hc", "hc爬!"},
 };
 
-json nicknameInfo = {
-	{"12008", "三寒鸦烧金龙"},
-	{"12012", "爆牌"},
-	{"12018", "独角兽"},
-	{"12002", "igniIgni"},
-	{"12033", "金天气"},
-	{"12034", "金天气"},
-	{"13007", "爆牌"},
-	{"13010", "小白龙"},
-	{"13012", "绿龙"},
-	{"13014", "三基佬"},
-	{"13013", "三基佬"},
-	{"13017", "三基佬"},
-	{"23007", "三美女"},
-	{"23008", "三美女"},
-	{"23004", "三美女"},
-	{"33006", "爆牌"},
-	{"33007", "指哥"},
-	{"44023", "轻骑兵"},
-	{"53009", "大萝卜"},
-	{"52004", "洗脚妹"},
-	{"70019", "三矮子"},
-	{"70020", "三矮子"},
-	{"70021", "三矮子"},
-}
+json nicknameInfo = {{"12008", "三寒鸦烧金龙"}, {"12012", "爆牌"},   {"12018", "独角兽"}, {"12002", "igniIgni"},
+                     {"12033", "金天气"},       {"12034", "金天气"}, {"13007", "爆牌"},   {"13010", "小白龙"},
+                     {"13012", "绿龙"},         {"13014", "三基佬"}, {"13013", "三基佬"}, {"13017", "三基佬"},
+                     {"23007", "三美女"},       {"23008", "三美女"}, {"23004", "三美女"}, {"33006", "爆牌"},
+                     {"33007", "指哥"},         {"44023", "轻骑兵"}, {"53009", "大萝卜"}, {"52004", "洗脚妹"},
+                     {"70019", "三矮子"},       {"70020", "三矮子"}, {"70021", "三矮子"}};
 
 
 string searchCard(const string &msg) {
@@ -92,31 +74,33 @@ string searchCard(const string &msg) {
     }
 
     vector<string> possibleAnswer;
-	set<string> possibleAnswerSet;
+    unordered_set<string> possibleAnswerSet;
     for (auto it = cardInfo.begin(); it != cardInfo.end(); ++it) {
-		json nestedInfo = *it;
+        json nestedInfo = *it;
 
         string name = nestedInfo["Name"].get<string>();
         string info = nestedInfo["Info"].get<string>();
-		string flavor = nestedInfo["Flavor"].get<string>();
+        string flavor = nestedInfo["Flavor"].get<string>();
 
         size_t foundName = name.find(searchContent);
         size_t foundInfo = info.find(searchContent);
         size_t foundFlavor = flavor.find(searchContent);
         if (foundName != string::npos || foundInfo != string::npos || foundFlavor != string::npos) {
-            possibleAnswer.push_back(nestedInfo["CardId"]);
-			possibleAnswerSet.insert(nestedInfo["CardId"]);
-		}
+            string cardId = nestedInfo["CardId"].get<string>();
+            possibleAnswer.push_back(cardId);
+            possibleAnswerSet.insert(cardId);
+        }
     }
 
-    for (auto it = nickname.items()) {
-		string nickname = it.value();
-		string cardId = it.key();
-		if (possibleAnswerSet.count(cardId) != 0) continue;
-		size_t foundNickname = nickname.find([searchContent]);
-		if (foundNickname != string::ops){
-			possibleAnswer.push_back(cardId);
-	}
+    for (auto &it : nicknameInfo.items()) {
+        string nickname = it.value();
+        string cardId = it.key();
+        if (possibleAnswerSet.count(cardId) != 0) continue;
+        size_t foundNickname = nickname.find(nicknameInfo[searchContent]);
+        if (foundNickname != string::npos) {
+            possibleAnswer.push_back(cardId);
+        }
+    }
 
     if (possibleAnswer.size() == 0) {
         return "[WARN] 没有找到符合条件的个体。要不要试试/baidu呢？";
@@ -136,7 +120,7 @@ string searchCard(const string &msg) {
             + "Info: " + targetInfo["Info"].get<string>() + '\n' + "Group: " + targetInfo["Group"].get<string>() + '\n'
             + "Faction: " + targetInfo["Faction"].get<string>() + '\n' + "Categories: " + categoriesString + '\n';
         return returnInfo;
-    } else if (possibleAnswer.size() > 10) {
+    } else if (possibleAnswer.size() > 12) {
         string returnInfo = "[WARN] 搜索结果过多，请使用更精确的关键词。";
         return returnInfo;
     } else {
@@ -158,7 +142,7 @@ bool checkIfSearchCard(const string &msg) {
     }
 }
 
-string gethex(unsigned int c) //参数必须是int，你懂的
+string gethex(unsigned int c)
 {
     std::ostringstream stm;
     stm << '%' << std::hex << std::nouppercase << c;
@@ -174,7 +158,7 @@ string encode(string str) {
     string r;
 
     for (unsigned int i = 0; i < str.length(); i += 1) {
-        unsigned char c = str.at(i); //这里必须是无符号型，你懂得
+        unsigned char c = str.at(i);
         if (unreserved.find(c) != -1)
             r += c;
         else
@@ -246,7 +230,8 @@ string searchInfo(const string &msg) {
     if (foundDownload != string::npos) {
         return "[INFO] "
                "群文件/"
-               "客户端里面可以下载游戏，带有DIY的是DIY版本！\nzip结尾的是电脑版，apk结尾的是安卓版，dmg结尾的是mac版\n"
+               "客户端里面可以下载游戏，带有DIY的是DIY版本！\nzip结尾的是电脑版，apk结尾的是安卓版，dmg结尾的是mac"
+               "版\n"
                "在客户端文件夹外也有DIY服的语音抢先体验版，欢迎大家下载！\nDIY服务器的更新内容在：https://shimo.im/"
                "docs/TQdjjwpPwd9hJhKc\n DIY的修改意见在：https://shimo.im/docs/hRIn0C91IFUYZZ6n";
     }
@@ -302,7 +287,8 @@ CQ_INIT {
         } else if (event.message.substr(0, 8) == "/welcome") {
             const string msg =
                 "[WELCOME] 新人好！本群主要讨论的是老昆特相关事宜！\n群文件/"
-                "客户端里面可以下载游戏，带有DIY的是DIY版本！\nzip结尾的是电脑版，apk结尾的是安卓版，dmg结尾的是mac版\n"
+                "客户端里面可以下载游戏，带有DIY的是DIY版本！\nzip结尾的是电脑版，apk结尾的是安卓版，dmg结尾的是mac"
+                "版\n"
                 "在客户端文件夹外也有DIY服的语音抢先体验版，欢迎下载！\nDIY服的更新内容在：https://shimo.im/"
                 "docs/TQdjjwpPwd9hJhKc\n DIY的修改意见在：https://shimo.im/docs/hRIn0C91IFUYZZ6n\n期待你的参与！";
             send_message(event.target, msg); // 发送群消息
@@ -347,7 +333,8 @@ CQ_INIT {
         } else if (event.message.substr(0, 8) == "/welcome") {
             const string msg =
                 "[WELCOME] 新人好！本群主要讨论的是老昆特相关事宜！\n群文件/"
-                "客户端里面可以下载游戏，带有DIY的是DIY版本！\nzip结尾的是电脑版，apk结尾的是安卓版，dmg结尾的是mac版\n"
+                "客户端里面可以下载游戏，带有DIY的是DIY版本！\nzip结尾的是电脑版，apk结尾的是安卓版，dmg结尾的是mac"
+                "版\n"
                 "在客户端文件夹外也有DIY服的语音抢先体验版，欢迎下载！\nDIY服的更新内容在：https://shimo.im/"
                 "docs/TQdjjwpPwd9hJhKc\n DIY的修改意见在：https://shimo.im/docs/hRIn0C91IFUYZZ6n\n期待你的参与！";
             send_group_message(event.group_id, msg); // 发送群消息
@@ -386,7 +373,8 @@ CQ_INIT {
         try {
             const string msg =
                 "[WELCOME] 新人好！本群主要讨论的是老昆特相关事宜！\n群文件/"
-                "客户端里面可以下载游戏，带有DIY的是DIY版本！\nzip结尾的是电脑版，apk结尾的是安卓版，dmg结尾的是mac版\n"
+                "客户端里面可以下载游戏，带有DIY的是DIY版本！\nzip结尾的是电脑版，apk结尾的是安卓版，dmg结尾的是mac"
+                "版\n"
                 "在客户端文件夹外也有DIY服的语音抢先体验版，欢迎下载！\nDIY服的更新内容在：https://shimo.im/"
                 "docs/TQdjjwpPwd9hJhKc\n DIY的修改意见在：https://shimo.im/docs/hRIn0C91IFUYZZ6n\n期待你的参与！";
             send_group_message(event.group_id, msg); // 发送群消息
