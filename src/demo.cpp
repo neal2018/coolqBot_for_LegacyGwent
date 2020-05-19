@@ -117,7 +117,8 @@ string searchCard(const string &msg) {
             "CardId: " + targetInfo["CardId"].get<string>() + '\n' + "Name: " + targetInfo["Name"].get<string>() + '\n'
             + "Strength: " + to_string(targetInfo["Strength"].get<int>()) + '\n'
             + "Info: " + targetInfo["Info"].get<string>() + '\n' + "Group: " + targetInfo["Group"].get<string>() + '\n'
-            + "Faction: " + targetInfo["Faction"].get<string>() + '\n' + "Categories: " + categoriesString + '\n';
+            + "Faction: " + targetInfo["Faction"].get<string>() + '\n' + "Categories: " + categoriesString + '\n'
+            + "背景故事: " + targetInfo["Flavor"].get<string>();
         return returnInfo;
     } else if (possibleAnswer.size() > 12) {
         string returnInfo = "[WARN] 搜索结果过多，请使用更精确的关键词。";
