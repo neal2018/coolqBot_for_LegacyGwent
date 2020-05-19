@@ -18,7 +18,7 @@ const string CardMapVersion = "1.0.0.9";
 json cardInfo;
 
 json eggInfo = {
-    {"支柱", "支柱万岁！赞美支柱！"},
+    {"支柱", "赞美支柱！"},
     {"尼哥", "尼哥爬"},
     {"hc", "hc爬!"},
 };
@@ -211,7 +211,14 @@ string searchInfo(const string &msg) {
                "docs/TQdjjwpPwd9hJhKc\n DIY的修改意见在：https://shimo.im/docs/hRIn0C91IFUYZZ6n";
     }
 
-    return "[INFO] /info后面可以输入【文档】、【在线】或者【下载】查看相关内容！";
+    auto foundWelcome = searchContent.find("匹配码");
+    if (foundWelcome != string::npos) {
+        return "[INFO] "
+               "匹配界面右下角可以输入匹配码，匹配码一样的玩家可以相互好友对战！\n"
+               "匹配码输入ai或者ai1可以匹配ai，但会优先匹配在线玩家。使用ai#f或者ai1#f可以强制匹配ai。";
+    }
+
+    return "[INFO] /info后面可以输入【文档】、【在线】、【匹配码】或者【下载】查看相关内容！";
 }
 
 bool checkIfSearchInfo(const string &msg) {
