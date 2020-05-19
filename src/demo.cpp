@@ -254,9 +254,9 @@ bool checkIfSearchInfo(const string &msg) {
 
 CQ_INIT {
     on_enable([] {
-        ifstream f("/mnt/c/Users/neal/Projects/coolqBot_for_LegacyGwent/src/cardInfo.json");
+        ifstream f("/home/user/coolq/data/cardInfo.json");
+        // ifstream f("/mnt/c/Users/neal/Projects/coolqBot_for_LegacyGwent/src/cardInfo.json");
         cardInfo = json::parse(f);
-        // std::cout << cardInfo;
         logging::info("启用", "插件已启用");
     });
 
