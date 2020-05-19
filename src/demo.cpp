@@ -1,3 +1,5 @@
+#include <cstdlib>
+#include <ctime>
 #include <fstream>
 #include <iostream>
 #include <set>
@@ -18,7 +20,7 @@ json cardInfo;
 json eggInfo = {
     {"支柱", "支柱万岁！赞美支柱！"},
     {"尼哥", "尼哥爬"},
-    {"hc", "hc爬"},
+    {"hc", "hc爬!"},
 };
 
 string searchCard(const string &msg) {
@@ -77,7 +79,7 @@ string searchCard(const string &msg) {
     }
 
     if (possibleAnswer.size() == 0) {
-        return "[WARN] 没有找到符合条件的个体。";
+        return "[WARN] 没有找到符合条件的个体。要不要试试/baidu呢？";
     } else if (possibleAnswer.size() == 1) {
         json targetInfo = cardInfo[possibleAnswer[0]];
 
@@ -302,6 +304,16 @@ CQ_INIT {
                 "在客户端文件夹外也有DIY服的语音抢先体验版，欢迎下载！\nDIY服的更新内容在：https://shimo.im/"
                 "docs/TQdjjwpPwd9hJhKc\n DIY的修改意见在：https://shimo.im/docs/hRIn0C91IFUYZZ6n\n期待你的参与！";
             send_group_message(event.group_id, msg); // 发送群消息
+        } else if (event.message == "/help" || event.message == "/h") {
+            const string msg =
+                "[HELP] 你好！发送以下命令可以触发相应的效果：\n"
+                "/help 或 /h：显示本信息\n"
+                "/info：显示相关的信息\n"
+                "/welcome：发送入群欢迎信息"
+                "/searchcard 或 /scard 或 /sc + 关键词：搜索相关的卡牌效果\n"
+                "/baidu 或 /bd + 关键词：使用百度搜索\n"
+                "期待大家多多打牌！";
+            send_group_message(event.group_id, msg);
         } else {
             auto foundhc = event.message.find("hc");
             if (foundhc != string::npos) {
@@ -309,6 +321,15 @@ CQ_INIT {
                     send_group_message(event.group_id, "hc爬！"); // 发送群消息
                 } catch (ApiError &err) {
                     logging::warning("群聊", "群聊消息失败, 错误码: " + to_string(err.code));
+                }
+            } else {
+                srand(time(NULL));
+                if ((rand() % 100) == 0) {
+                    try {
+                        send_group_message(event.group_id, "有没有人来打一把"); // 发送群消息
+                    } catch (ApiError &err) {
+                        logging::warning("群聊", "群聊消息失败, 错误码: " + to_string(err.code));
+                    }
                 }
             }
         }
