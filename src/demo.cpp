@@ -313,13 +313,13 @@ CQ_INIT {
             send_group_message(event.group_id, msg); // 发送群消息
         } else if (event.message == "/help" || event.message == "/h") {
             const string msg =
-                "[HELP] 你好！发送以下命令可以触发相应的效果：\n"
+                "[HELP] 发送以下命令可以触发相应效果：\n"
                 "/help 或 /h：显示本信息\n"
                 "/info：显示相关的信息\n"
                 "/welcome：发送入群欢迎信息\n"
-                "/searchcard 或 /scard 或 /sc + 关键词：搜索相关的卡牌效果\n"
+                "/searchcard 或 /sc + 关键词：搜索卡牌效果\n"
                 "/baidu 或 /bd + 关键词：使用百度搜索\n"
-                "期待大家多多打牌！";
+                "小助手期待大家多多打牌！";
             send_group_message(event.group_id, msg);
         } else {
             auto foundhc = event.message.find("hc");
