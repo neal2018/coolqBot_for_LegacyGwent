@@ -202,8 +202,8 @@ string searchInfo(const string &msg) {
                "原服的在线人数在：http://cynthia.ovyno.com:5000/\n欢迎大家一起打牌！";
     }
 
-    auto foundWelcome = searchContent.find("下载");
-    if (foundWelcome != string::npos) {
+    auto foundDownload = searchContent.find("下载");
+    if (foundDownload != string::npos) {
         return "[INFO] "
                "群文件/"
                "客户端里面可以下载游戏，带有DIY的是DIY版本！\nzip结尾的是电脑版，apk结尾的是安卓版，dmg结尾的是mac版\n"
@@ -211,8 +211,8 @@ string searchInfo(const string &msg) {
                "docs/TQdjjwpPwd9hJhKc\n DIY的修改意见在：https://shimo.im/docs/hRIn0C91IFUYZZ6n";
     }
 
-    auto foundWelcome = searchContent.find("匹配码");
-    if (foundWelcome != string::npos) {
+    auto foundPairCode = searchContent.find("匹配码");
+    if (foundPairCode != string::npos) {
         return "[INFO] "
                "匹配界面右下角可以输入匹配码，匹配码一样的玩家可以相互好友对战！\n"
                "匹配码输入ai或者ai1可以匹配ai，但会优先匹配在线玩家。使用ai#f或者ai1#f可以强制匹配ai。";
