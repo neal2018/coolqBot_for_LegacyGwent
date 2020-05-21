@@ -115,10 +115,10 @@ string searchCard(const string &msg) {
         }
 
         string returnInfo =
-            "CardId: " + targetInfo["CardId"].get<string>() + '\n' + "Name: " + targetInfo["Name"].get<string>() + '\n'
-            + "Strength: " + to_string(targetInfo["Strength"].get<int>()) + '\n'
-            + "Info: " + targetInfo["Info"].get<string>() + '\n' + "Group: " + targetInfo["Group"].get<string>() + '\n'
-            + "Faction: " + targetInfo["Faction"].get<string>() + '\n' + "Categories: " + categoriesString + '\n'
+            "卡牌Id: " + targetInfo["CardId"].get<string>() + '\n' + "名称: " + targetInfo["Name"].get<string>() + '\n'
+            + "点数: " + to_string(targetInfo["Strength"].get<int>()) + '\n'
+            + "效果: " + targetInfo["Info"].get<string>() + '\n' + "品质: " + targetInfo["Group"].get<string>() + '\n'
+            + "势力: " + targetInfo["Faction"].get<string>() + '\n' + "标签: " + categoriesString + '\n'
             + "背景故事: " + targetInfo["Flavor"].get<string>();
         return returnInfo;
     } else if (possibleAnswer.size() > 12) {
