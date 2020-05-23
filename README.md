@@ -14,11 +14,11 @@
 ```
 git submodule update --init --recursive
 ```
-然后把`cardInfo.json`存放到电脑中的任一位置，再把`demo.cpp`中的文件地址
+然后把`src/cardData`文件夹存放到电脑中的任一位置，再把`main.cpp`中的文件地址
 ```
-ifstream f("/home/user/coolq/data/cardInfo.json");
+const string DATA_PATH = "/home/user/coolq/data/cardData/";
 ```
-改为`cardInfo.json`存放的位置即可。
+改为`src/cardData`文件夹存放的位置，然后按照coolq模板的[文档](https://cqcppsdk.cqp.moe/)执行打包即可。推荐直接使用[AppVeyor](https://ci.appveyor.com/)持续集成，使用方法也可参照coolq模板的[文档](https://cqcppsdk.cqp.moe/)。
 
 
 # 项目模板
