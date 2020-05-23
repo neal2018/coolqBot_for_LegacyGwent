@@ -7,8 +7,6 @@
 #include <cqcppsdk/cqcppsdk.h>
 #include <nlohmann/json.hpp>
 
-#include "data.h"
-
 using json = nlohmann::json;
 using namespace cq;
 using namespace std;
@@ -26,7 +24,6 @@ string arrayToString(const vector<string> &str) {
 string getCardInfo(json targetInfo) {
     vector<string> categoriesArray = targetInfo["Categories"];
     string categoriesString = arrayToString(categoriesArray);
-
     return "卡牌Id: " + targetInfo["CardId"].get<string>() + '\n' + "名称: " + targetInfo["Name"].get<string>() + '\n'
            + "点数: " + to_string(targetInfo["Strength"].get<int>()) + '\n'
            + "效果: " + targetInfo["Info"].get<string>() + '\n' + "品质: " + targetInfo["Group"].get<string>() + '\n'
@@ -47,7 +44,7 @@ string getCardInfoEnglish(json targetInfo) {
            + "Story: " + targetInfo["Flavor"].get<string>();
 }
 
-string searchCard(const string &msg) {
+string searchCard(const string &msg, json &cardInfo, json &nicknameInfo, json &eggInfo) {
     string searchContent = "";
 
     // remove prefix
@@ -67,7 +64,7 @@ string searchCard(const string &msg) {
     searchContent.erase(itor, searchContent.end());
 
     if (eggInfo.contains(searchContent)) {
-        return eggInfo[searchContent];
+        return eggInfo[searchContent].get<string>();
     }
 
     if (cardInfo.contains(searchContent)) {
@@ -94,7 +91,6 @@ string searchCard(const string &msg) {
             possibleAnswerSet.insert(cardId);
         }
     }
-
     for (auto &it : nicknameInfo.items()) {
         string nickname = it.value();
         string cardId = it.key();
@@ -243,4 +239,27 @@ bool checkIfSearchInfo(const string &msg) {
     } else {
         return false;
     }
+}
+
+string getWelcomeMessage() {
+    return "[WELCOME] 新人好！本群主要讨论的是老昆特相关事宜！\n群文件/"
+           "客户端里面可以下载游戏，带有DIY的是DIY版本！\nzip结尾的是电脑版，apk结尾的是安卓版，dmg结尾的是mac"
+           "版\n"
+           "在客户端文件夹外也有DIY服的语音抢先体验版，欢迎下载！\nDIY服的更新内容在：https://shimo.im/"
+           "docs/TQdjjwpPwd9hJhKc\n DIY的修改意见在：https://shimo.im/docs/hRIn0C91IFUYZZ6n\n期待你的参与！";
+}
+
+string getHelpMessage() {
+    return "[HELP] 发送以下命令可以触发相应效果：\n"
+           "/help 或 /h：显示本信息\n"
+           "/info：显示相关的信息\n"
+           "/welcome：发送入群欢迎信息\n"
+           "/searchcard 或 /sc + 关键词：搜索卡牌效果\n"
+           "/baidu 或 /bd + 关键词：使用百度搜索\n"
+           "私聊发送/send + 来一把 可以让小助手帮助约战\n"
+           "小助手期待大家多多打牌！";
+}
+
+string getAskForFightMessage() {
+    return "有人约战！有没有人来打一把！";
 }

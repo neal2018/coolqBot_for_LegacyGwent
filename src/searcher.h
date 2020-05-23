@@ -1,5 +1,6 @@
-#ifndef SRC_SEARCHER 
-#define SRC_SEARCHER
+#pragma once
+#ifndef INCLUDE_SRC_SEARCHER
+#define INCLUDE_SRC_SEARCHER
 
 #include <stdlib.h>
 #include <time.h>
@@ -16,7 +17,8 @@ std::string getCardInfo(nlohmann::json targetInfo);
 
 std::string getCardInfoEnglish(nlohmann::json targetInfo);
 
-std::string searchCard(const std::string &msg);
+std::string searchCard(const std::string &msg, nlohmann::json &cardInfo, nlohmann::json &nicknameInfo,
+                       nlohmann::json &eggInfo);
 
 bool checkIfSearchCard(const std::string &msg);
 
@@ -32,4 +34,10 @@ std::string searchInfo(const std::string &msg);
 
 bool checkIfSearchInfo(const std::string &msg);
 
-#endif
+std::string getWelcomeMessage();
+
+std::string getHelpMessage();
+
+std::string getAskForFightMessage();
+
+#endif //INCLUDE_SRC_SEARCHER
