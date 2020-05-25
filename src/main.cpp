@@ -18,6 +18,8 @@ using MessageSegment = cq::message::MessageSegment;
 const string DATA_PATH = "/home/user/coolq/data/cardData/";
 // const string DATA_PATH = "/mnt/c/Users/neal/Projects/coolqBot_for_LegacyGwent/src/cardData/";
 
+bool hcSwitch = false;
+
 const int32_t GROUP_ID = 945408322;
 
 json cardInfo;
@@ -66,9 +68,13 @@ CQ_INIT {
                 const string msg = getAskForFightMessage();
                 send_group_message(GROUP_ID, msg);
             }
+        } else if (event.message.substr(0, 6) == "/offhc") {
+            hcSwitch = false;
+        } else if (event.message.substr(0, 5) == "/onhc") {
+            hcSwitch = true;
         } else {
             auto foundhc = event.message.find("hc");
-            if (foundhc != string::npos) {
+            if (foundhc != string::npos && hcSwitch) {
                 try {
                     send_message(event.target, "hc爬！"); // 发送群消息
                 } catch (ApiError &err) {
@@ -112,7 +118,7 @@ CQ_INIT {
             send_group_message(event.group_id, msg);
         } else {
             auto foundhc = event.message.find("hc");
-            if (foundhc != string::npos) {
+            if (foundhc != string::npos && hcSwitch) {
                 try {
                     send_group_message(event.group_id, "hc爬！"); // 发送群消息
                 } catch (ApiError &err) {
