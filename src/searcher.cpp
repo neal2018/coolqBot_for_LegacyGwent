@@ -215,12 +215,10 @@ string searchInfo(const string &msg) {
 
     auto foundDownload = searchContent.find("下载");
     if (foundDownload != string::npos) {
-        return "[INFO] "
-               "群文件/"
-               "客户端里面可以下载游戏，带有DIY的是DIY版本！\nzip结尾的是电脑版，apk结尾的是安卓版，dmg结尾的是mac"
-               "版\n"
-               "在客户端文件夹外也有DIY服的语音抢先体验版，欢迎大家下载！\nDIY服务器的更新内容在：https://shimo.im/"
-               "docs/TQdjjwpPwd9hJhKc\n DIY的修改意见在：https://shimo.im/docs/hRIn0C91IFUYZZ6n";
+        return "[INFO] DIY服下载地址：http://cynthia.ovyno.com:5005/download\n"
+               "电脑版，安卓版都有。另外，群文件/"
+               "客户端里也可以下载，没有DIY前缀的是原版服务器，zip结尾的是电脑版，apk结尾的是安卓版，dmg结尾的是mac"
+               "版\n，小助手欢迎大家下载！";
     }
 
     auto foundPairCode = searchContent.find("匹配码");

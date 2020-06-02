@@ -126,7 +126,7 @@ CQ_INIT {
                 }
             } else {
                 srand(time(NULL));
-                if ((rand() % 200) == 0) {
+                if ((rand() % 500) == 0) {
                     try {
                         send_group_message(event.group_id, "有没有人来打一把，嘤嘤嘤"); // 发送群消息
                     } catch (ApiError &err) {
