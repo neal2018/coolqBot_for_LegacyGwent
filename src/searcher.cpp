@@ -204,7 +204,8 @@ string searchInfo(const string &msg) {
     auto foundDoc = searchContent.find("文档");
     if (foundDoc != string::npos) {
         return "[INFO] DIY服务器的更新内容在：https://shimo.im/docs/TQdjjwpPwd9hJhKc\n "
-               "DIY的修改意见在：https://shimo.im/docs/hRIn0C91IFUYZZ6n\n欢迎大家踊跃参与！";
+               "DIY的修改意见在：https://shimo.im/docs/hRIn0C91IFUYZZ6n\n"
+               "讨论区在：https://github.com/LegacyGwent/LegacyGwent/issues\n欢迎大家踊跃参与！";
     }
 
     auto foundWeb = searchContent.find("在线");
@@ -213,12 +214,17 @@ string searchInfo(const string &msg) {
                "原服的在线人数在：http://cynthia.ovyno.com:5000/\n欢迎大家一起打牌！";
     }
 
+    auto foundDownload = searchContent.find("下载地址");
+    if (foundDownload != string::npos) {
+        return "[INFO] http://cynthia.ovyno.com:5005/download";
+    }
+
     auto foundDownload = searchContent.find("下载");
     if (foundDownload != string::npos) {
         return "[INFO] DIY服下载地址：http://cynthia.ovyno.com:5005/download\n"
-               "电脑版，安卓版都有。另外，群文件/"
+               "电脑版，安卓版都有。\n另外，群文件/"
                "客户端里也可以下载，没有DIY前缀的是原版服务器，zip结尾的是电脑版，apk结尾的是安卓版，dmg结尾的是mac"
-               "版\n，小助手欢迎大家下载！";
+               "版\n小助手欢迎大家下载！";
     }
 
     auto foundPairCode = searchContent.find("匹配码");
@@ -228,7 +234,13 @@ string searchInfo(const string &msg) {
                "匹配码输入ai或者ai1可以匹配ai，但会优先匹配在线玩家。使用ai#f或者ai1#f可以强制匹配ai。";
     }
 
-    return "[INFO] /info后面可以输入【文档】、【在线】、【匹配码】或者【下载】查看相关内容！";
+    auto discussCode = searchContent.find("讨论");
+    if (foundPairCode != string::npos) {
+        return "[INFO] "
+               "https://github.com/LegacyGwent/LegacyGwent/issues";
+    }
+
+    return "[INFO] /info后面可以输入【文档】、【在线】、【匹配码】、【讨论】或者【下载】查看相关内容！";
 }
 
 bool checkIfSearchInfo(const string &msg) {
@@ -240,11 +252,14 @@ bool checkIfSearchInfo(const string &msg) {
 }
 
 string getWelcomeMessage() {
-    return "[WELCOME] 新人好！本群主要讨论的是老昆特相关事宜！\n群文件/"
+    return "[WELCOME] "
+           "新人好！本群主要讨论的是老昆特相关事宜！\nDIY服下载地址：http://cynthia.ovyno.com:5005/"
+           "download\n同时，群文件/"
            "客户端里面可以下载游戏，带有DIY的是DIY版本！\nzip结尾的是电脑版，apk结尾的是安卓版，dmg结尾的是mac"
            "版\n"
            "在客户端文件夹外也有DIY服的语音抢先体验版，欢迎下载！\nDIY服的更新内容在：https://shimo.im/"
-           "docs/TQdjjwpPwd9hJhKc\n DIY的修改意见在：https://shimo.im/docs/hRIn0C91IFUYZZ6n\n期待你的参与！";
+           "docs/TQdjjwpPwd9hJhKc\n DIY的修改意见在：https://shimo.im/docs/hRIn0C91IFUYZZ6n\n期待你的参与！\n "
+           "讨论区在： https://github.com/LegacyGwent/LegacyGwent/issues";
 }
 
 string getHelpMessage() {
