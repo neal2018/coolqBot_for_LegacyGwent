@@ -214,8 +214,8 @@ string searchInfo(const string &msg) {
                "原服的在线人数在：http://cynthia.ovyno.com:5000/\n欢迎大家一起打牌！";
     }
 
-    auto foundDownload = searchContent.find("下载地址");
-    if (foundDownload != string::npos) {
+    auto foundDownloadAddress = searchContent.find("下载地址");
+    if (foundDownloadAddress != string::npos) {
         return "[INFO] http://cynthia.ovyno.com:5005/download";
     }
 
