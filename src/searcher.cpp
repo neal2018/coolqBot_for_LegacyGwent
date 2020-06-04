@@ -234,8 +234,8 @@ string searchInfo(const string &msg) {
                "匹配码输入ai或者ai1可以匹配ai，但会优先匹配在线玩家。使用ai#f或者ai1#f可以强制匹配ai。";
     }
 
-    auto discussCode = searchContent.find("讨论");
-    if (foundPairCode != string::npos) {
+    auto foundDiscussCode = searchContent.find("讨论");
+    if (foundDiscussCode != string::npos) {
         return "[INFO] "
                "https://github.com/LegacyGwent/LegacyGwent/issues";
     }
