@@ -234,6 +234,19 @@ string searchInfo(const string &msg) {
                "匹配码输入ai或者ai1可以匹配ai，但会优先匹配在线玩家。使用ai#f或者ai1#f可以强制匹配ai。";
     }
 
+    auto foundShowAddress = searchContent.find("提名地址");
+    if (foundShowAddress != string::npos) {
+        return "[INFO] https://github.com/LegacyGwent/LegacyGwent/projects/1";
+    }
+
+    auto foundShow = searchContent.find("提名");
+    if (foundShow != string::npos) {
+        return "[INFO] "
+               "选了10张提名卡，打算从提名的10张里面投票选三张实装！欢迎讨论\n"
+               "可以去 https://github.com/LegacyGwent/LegacyGwent/projects/1 查看提名卡！\n"
+               "github使用试验中…大家可以先试试看！";
+    }
+
     auto foundDiscussCode = searchContent.find("讨论");
     if (foundDiscussCode != string::npos) {
         return "[INFO] "
@@ -253,13 +266,14 @@ bool checkIfSearchInfo(const string &msg) {
 
 string getWelcomeMessage() {
     return "[WELCOME] "
-           "新人好！本群主要讨论的是老昆特相关事宜！\nDIY服下载地址：http://cynthia.ovyno.com:5005/"
-           "download\n同时，群文件/"
-           "客户端里面可以下载游戏，带有DIY的是DIY版本！\nzip结尾的是电脑版，apk结尾的是安卓版，dmg结尾的是mac"
-           "版\n"
-           "在客户端文件夹外也有DIY服的语音抢先体验版，欢迎下载！\nDIY服的更新内容在：https://shimo.im/"
-           "docs/TQdjjwpPwd9hJhKc\n DIY的修改意见在：https://shimo.im/docs/hRIn0C91IFUYZZ6n\n期待你的参与！\n "
-           "讨论区在： https://github.com/LegacyGwent/LegacyGwent/issues";
+           "新人好！本群主要讨论的是老昆特相关事宜！\n"
+           "DIY服下载地址：http://cynthia.ovyno.com:5005/download \n"
+           "同时，群文件/客户端里面可以下载游戏，带有DIY的是DIY版本，zip结尾的是电脑版，apk结尾的是安卓版，dmg结尾的是mac"
+           "版 \n"
+           "在客户端文件夹外也有DIY服的语音抢先体验版，欢迎下载！\n"
+           "DIY服的更新内容在：https://shimo.im/docs/TQdjjwpPwd9hJhKc \n"
+           "DIY的修改意见在：https://shimo.im/docs/hRIn0C91IFUYZZ6n \n期待你的参与！\n "
+           "讨论区在：https://github.com/LegacyGwent/LegacyGwent/issues";
 }
 
 string getHelpMessage() {
