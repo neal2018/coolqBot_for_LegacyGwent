@@ -116,11 +116,17 @@ CQ_INIT {
         } else if (event.message == "/help" || event.message == "/h") {
             const string msg = getHelpMessage();
             send_group_message(event.group_id, msg);
+        } else if (event.message.substr(0, 6) == "/offhc") {
+            hcSwitch = false;
+            send_group_message(event.group_id, "hc功能已关闭");
+        } else if (event.message.substr(0, 5) == "/onhc") {
+            hcSwitch = true;
+            send_group_message(event.group_id, "hc功能已开启");
         } else {
             auto foundhc = event.message.find("hc");
             if (foundhc != string::npos && hcSwitch) {
                 try {
-                    send_group_message(event.group_id, "hc爬！"); // 发送群消息
+                    send_group_message(event.group_id, "不要聊hc啦，要不要来试试群文件的老昆特？"); // 发送群消息
                 } catch (ApiError &err) {
                     logging::warning("群聊", "群聊消息失败, 错误码: " + to_string(err.code));
                 }
