@@ -242,8 +242,8 @@ string searchInfo(const string &msg) {
     auto foundShow = searchContent.find("提名");
     if (foundShow != string::npos) {
         return "[INFO] "
-               "选了10张提名卡，打算从提名的10张里面投票选三张实装！欢迎讨论\n"
-               "可以去 https://github.com/LegacyGwent/LegacyGwent/projects/1 查看提名卡！\n"
+               "提名正在进行中…\n"
+               "请大家关注群内投票！\n"
                "github使用试验中…大家可以先试试看！";
     }
 
@@ -253,7 +253,13 @@ string searchInfo(const string &msg) {
                "https://github.com/LegacyGwent/LegacyGwent/issues";
     }
 
-    return "[INFO] /info后面可以输入【文档】、【在线】、【匹配码】、【讨论】或者【下载】查看相关内容！";
+    auto foundTieba = searchContent.find("贴吧");
+    if (foundTieba != string::npos) {
+        return "[INFO] "
+               "https://tieba.baidu.com/f?ie=utf-8&kw=%E6%80%80%E6%97%A7%E6%98%86%E7%89%B9%E7%89%8C";
+    }
+
+    return "[INFO] /info后面可以输入【文档】、【在线】、【匹配码】、【讨论】、【贴吧】或者【下载】查看相关内容！";
 }
 
 bool checkIfSearchInfo(const string &msg) {
