@@ -133,9 +133,10 @@ CQ_INIT {
             auto foundhc4 = event.message.find("hC");
             auto foundhc5 = event.message.find("homecoming");
             auto foundhc6 = event.message.find("新昆特");
-            auto foundhc6 = event.message.find("统御");
+            auto foundhc7 = event.message.find("统御");
             bool check = foundhc1 != string::npos || foundhc2 != string::npos || foundhc3 != string::npos
-                         || foundhc4 != string::npos || foundhc5 != string::npos || foundhc6 != string::npos;
+                         || foundhc4 != string::npos || foundhc5 != string::npos || foundhc6 != string::npos
+                         || foundhc7 != string::npos;
             if (check) {
                 if (hcCounter <= 5) {
                     try {
