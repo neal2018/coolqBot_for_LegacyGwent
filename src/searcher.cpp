@@ -59,7 +59,7 @@ string searchCard(const string &msg, json &cardInfo, json &nicknameInfo, json &e
         return "";
     }
 
-    // earse spaces
+    // erase spaces
     auto itor = remove_if(searchContent.begin(), searchContent.end(), ::isspace);
     searchContent.erase(itor, searchContent.end());
 
@@ -221,10 +221,11 @@ string searchInfo(const string &msg) {
 
     auto foundDownload = searchContent.find("下载");
     if (foundDownload != string::npos) {
-        return "[INFO] DIY服下载地址：http://cynthia.ovyno.com:5005/download\n"
-               "电脑版，安卓版都有。\n另外，群文件/"
-               "客户端里也可以下载，没有DIY前缀的是原版服务器，zip结尾的是电脑版，apk结尾的是安卓版，dmg结尾的是mac"
-               "版\n小助手欢迎大家下载！";
+        return "[INFO] 原版服务器下载地址：群文件/客户端"
+               "DIY服下载地址：http://cynthia.ovyno.com:5005/download\n"
+               "电脑版，安卓版都有。\n"
+               "zip结尾的是电脑版，apk结尾的是安卓版，dmg结尾的是mac版\n"
+               "小助手欢迎大家下载！";
     }
 
     auto foundPairCode = searchContent.find("匹配码");
@@ -273,13 +274,13 @@ bool checkIfSearchInfo(const string &msg) {
 string getWelcomeMessage() {
     return "[WELCOME] "
            "新人好！本群主要讨论的是老昆特相关事宜！\n"
+           "原版服务器下载地址：群文件/客户端 \n"
            "DIY服下载地址：http://cynthia.ovyno.com:5005/download \n"
-           "同时，群文件/客户端里面可以下载游戏，带有DIY的是DIY版本，zip结尾的是电脑版，apk结尾的是安卓版，dmg结尾的是mac"
-           "版 \n"
+           "zip结尾的是电脑版，apk结尾的是安卓版，dmg结尾的是ma版 \n"
            "在客户端文件夹外也有DIY服的语音抢先体验版，欢迎下载！\n"
-           "DIY服的更新内容在：https://shimo.im/docs/TQdjjwpPwd9hJhKc \n"
-           "DIY的修改意见在：https://shimo.im/docs/hRIn0C91IFUYZZ6n \n期待你的参与！\n "
-           "讨论区在：https://github.com/LegacyGwent/LegacyGwent/issues";
+           "DIY的修改意见在：https://shimo.im/docs/hRIn0C91IFUYZZ6n \n"
+           "讨论区在：https://github.com/LegacyGwent/LegacyGwent/issues \n"
+           "期待你的参与！\n";
 }
 
 string getHelpMessage() {
