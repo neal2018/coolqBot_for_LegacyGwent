@@ -1,3 +1,6 @@
+由于coolq停止服务，本项目已停止，迁移至https://github.com/neal2018/mirai_bot
+
+---
 # coolqBot for LegacyGwent
 本项目为老昆特的qq机器人。
 
